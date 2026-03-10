@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Summit Ledger
 
-## Getting Started
+Affiliate operations workspace built with `Next.js`, `Tailwind CSS`, `TypeScript`, `Supabase`, and `Stripe`.
 
-First, run the development server:
+Current build status:
+
+- Marketing landing page
+- Affiliate dashboard with overview, leads, sales, commissions, payouts, and settings
+- Admin dashboard with approvals, sales review, payouts, and rules views
+- Supabase helper scaffolding
+- Stripe Connect helper scaffolding and webhook route
+- Initial database schema in `supabase/migrations/0001_affiliate_system.sql`
+
+The UI is currently powered by mock data so the product shape is ready before live APIs are connected.
+
+## Local Setup
+
+Install dependencies and run the app:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` when you are ready to connect services.
 
-## Learn More
+Needed later:
 
-To learn more about Next.js, take a look at the following resources:
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+- `STRIPE_SECRET_KEY`
+- `STRIPE_WEBHOOK_SECRET`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Main Routes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `/`
+- `/auth/sign-in`
+- `/auth/sign-up`
+- `/dashboard`
+- `/dashboard/leads`
+- `/dashboard/sales`
+- `/dashboard/commissions`
+- `/dashboard/payouts`
+- `/dashboard/settings`
+- `/admin`
+- `/admin/affiliates`
+- `/admin/sales`
+- `/admin/payouts`
+- `/admin/rules`
 
-## Deploy on Vercel
+## Integration Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Supabase helper modules live under `lib/supabase`
+- Stripe helper module lives at `lib/stripe.ts`
+- Webhook endpoint scaffold lives at `app/api/stripe/webhook/route.ts`
+- Stripe Connect onboarding endpoint scaffold lives at `app/api/stripe/connect/route.ts`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Database
+
+The initial schema covers:
+
+- `profiles`
+- `affiliates`
+- `referrals`
+- `leads`
+- `sales`
+- `commission_rules`
+- `commissions`
+- `payouts`
+- `payout_items`
+- `audit_events`
+
+See `BUILD_TODO.md` for the working build planner.

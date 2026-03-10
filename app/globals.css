@@ -1,26 +1,119 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f3ede1;
+  --foreground: #1d3028;
+  --paper: #efe7d7;
+  --card: rgba(255, 252, 246, 0.82);
+  --card-strong: #f8f4ec;
+  --line: rgba(29, 48, 40, 0.12);
+  --olive: #617a42;
+  --olive-deep: #334a32;
+  --teal: #3f8090;
+  --amber: #d79a37;
+  --rose: #a95f49;
+  --ink-soft: #506058;
+  --shadow: 0 18px 48px rgba(31, 45, 39, 0.12);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-card-strong: var(--card-strong);
+  --color-line: var(--line);
+  --color-olive: var(--olive);
+  --color-olive-deep: var(--olive-deep);
+  --color-teal: var(--teal);
+  --color-amber: var(--amber);
+  --color-rose: var(--rose);
+  --color-ink-soft: var(--ink-soft);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-fraunces);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  min-height: 100vh;
   background: var(--background);
+  background-image:
+    radial-gradient(circle at top left, rgba(215, 154, 55, 0.2), transparent 26%),
+    radial-gradient(circle at 85% 10%, rgba(63, 128, 144, 0.16), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0));
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(97, 122, 66, 0.2);
+  color: var(--foreground);
+}
+
+.page-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.page-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(29, 48, 40, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29, 48, 40, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.34), transparent 88%);
+}
+
+.glass-panel {
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(20px);
+}
+
+.panel-strong {
+  border: 1px solid rgba(29, 48, 40, 0.1);
+  background: var(--card-strong);
+  box-shadow: var(--shadow);
+}
+
+.section-kicker {
+  color: var(--ink-soft);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.display-title {
+  font-family: var(--font-fraunces), serif;
+  letter-spacing: -0.04em;
+}
+
+.soft-ring {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+    0 10px 26px rgba(29, 48, 40, 0.08);
 }
